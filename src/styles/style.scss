@@ -1,0 +1,156 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+$root-color: #e48020;
+// $theme-colors: (
+//   "primary": $root-color,
+//   "orange": $root-color,
+// );
+
+@import "node_modules/bootstrap/scss/bootstrap";
+
+body,
+html {
+  //   font-size: 12px;
+}
+
+.modal-header {
+  background-color: #212121;
+  .modal-title {
+    color: white;
+  }
+}
+
+.form-label {
+  margin-bottom: 0.25rem;
+}
+
+* {
+  box-sizing: border-box !important;
+  font-family: "Roboto", sans-serif, "Microsoft JhengHei", "Helvetica", Arial !important;
+}
+
+a {
+  cursor: pointer;
+}
+
+ol,
+ul {
+  padding-left: 0;
+}
+.login-container {
+  background-color: #212121;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  overflow-y: auto;
+
+  .form-wrap {
+    .logo {
+      width: 160px;
+      display: block;
+      margin: 0 auto 12px auto;
+    }
+    .form {
+      background-color: white;
+      padding: 6% 7%;
+      width: 500px;
+    }
+  }
+}
+
+.spacer {
+  display: flex;
+  align-items: center;
+  [align="center"] {
+    align-items: center;
+  }
+  [align="end"] {
+    align-items: flex-end;
+  }
+  [align="start"] {
+    align-items: flex-start;
+  }
+  > * {
+    margin-right: 12px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+$sidebar-width: 260px;
+
+.wrapper {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  .sider {
+    height: 100%;
+    flex: 0 $sidebar-width;
+    width: $sidebar-width;
+    background-color: #212121;
+  }
+  .main {
+    flex: 0 100%;
+    height: 100%;
+    // overflow: hidden;
+    overflow-y: auto;
+    position: relative;
+  }
+  .header {
+    background-color: #212121;
+    height: 48px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+}
+
+.sidebar {
+  background-color: #212121;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  .logo {
+    width: 60%;
+    display: block;
+    margin: 12px auto 24px auto;
+  }
+
+  .nav {
+    width: 100%;
+    .nav-item {
+      color: white;
+      display: block;
+      width: 100%;
+      .nav-link {
+        color: white;
+        border-radius: 0;
+        &:hover,
+        &.active {
+          background-color: $root-color;
+        }
+      }
+      .nav-item {
+        padding-left: 1rem;
+      }
+      [data-icon] {
+        margin-right: 12px;
+      }
+    }
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: auto;
+  }
+}
