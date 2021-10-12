@@ -11,17 +11,22 @@ $root-color: #e48020;
 body,
 html {
   //   font-size: 12px;
+  font-weight: 500;
 }
 
 .modal-header {
+  padding: 0.5rem 1rem;
   background-color: #212121;
   .modal-title {
     color: white;
+    font-size: 1.2rem;
+    font-weight: 900;
   }
 }
 
 .form-label {
   margin-bottom: 0.25rem;
+  font-size: 0.875rem;
 }
 
 * {
@@ -37,6 +42,25 @@ ol,
 ul {
   padding-left: 0;
 }
+
+.loading {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.3s ease all;
+  background: url("../static/loading.svg") rgba(31, 31, 31, 0.75) center/64px
+    no-repeat;
+  &.active {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
 .login-container {
   background-color: #212121;
   height: 100vh;
@@ -56,7 +80,7 @@ ul {
     .form {
       background-color: white;
       padding: 6% 7%;
-      width: 500px;
+      width: 600px;
     }
   }
 }
@@ -153,4 +177,14 @@ $sidebar-width: 260px;
     flex-direction: column;
     margin-bottom: auto;
   }
+}
+
+.was-validated .form-control:valid,
+.form-control.is-valid {
+  background: none;
+}
+
+.invalid-feedback {
+  font-size: 8px;
+  margin: 0;
 }

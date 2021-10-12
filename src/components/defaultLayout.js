@@ -4,7 +4,6 @@ import Siderbar from "@/components/sidebar";
 import Header from "@/components/header";
 
 function DefaultLayout({ layout, component, ...rest }) {
-  console.log(layout);
   return (
     <Route
       {...rest}

@@ -1,23 +1,40 @@
 import React from "react";
 import { Form, Button, Row, FloatingLabel } from "react-bootstrap";
+import _ from "lodash";
 
-const Header = ({ children, form = {}, errors = {}, fieldKey = "" }) => {
+const FormItem = (props) => {
+  const {
+    children,
+    form = {},
+    errors = {},
+    rules = {},
+    fieldKey = "",
+    onChange = () => {},
+    ...rest
+  } = props;
+
+  const value = _.get(fieldKey, form) || "";
+  const error = _.get(fieldKey, errors) || "";
+
   return (
-    <Form.Group controlId="email">
-      <FloatingLabel controlId="email" label="Email" className="mb-3">
+    <Form.Group controlId={fieldKey}>
+      {/* <FloatingLabel controlId={fieldKey} label="Email">
+        <Form.Label>First Name</Form.Label>
         <Form.Control
-          id="email"
-          type="email"
+          id={fieldKey}
+          type="text"
           placeholder=" "
-          value={form.email}
-          onChange={(e) => onFormChange("email", e.target.value)}
+          value={value}
+          onChange={onChange}
+          {...rest}
         />
-      </FloatingLabel>
-      <Form.Control.Feedback type="invalid">
-        {errors.firstName}
-      </Form.Control.Feedback>
+      </FloatingLabel> */}
+      {children}
+      {error && (
+        <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
+      )}
     </Form.Group>
   );
 };
 
-export default Header;
+export default FormItem;
