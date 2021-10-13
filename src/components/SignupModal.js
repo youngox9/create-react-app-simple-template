@@ -30,7 +30,7 @@ function SignupModal(props) {
 
   async function onSignUp() {
     setTouched(true);
-    console.log(">>>>>", isValid);
+
     if (isValid) {
       try {
         const res = await axios({
@@ -39,7 +39,7 @@ function SignupModal(props) {
           data: form,
           withToken: false,
         });
-        toast("已寄出驗證信件", {
+        toast("Please check your registered email inbox", {
           type: "success",
         });
         onClose();
@@ -55,7 +55,7 @@ function SignupModal(props) {
       onHide={onClose}
       scrollable={true}
       centered={true}
-      size="lg"
+      size="md"
     >
       <Modal.Header closeButton>
         <Modal.Title>Sign Up</Modal.Title>
@@ -176,7 +176,7 @@ function SignupModal(props) {
       </Modal.Body>
       <Modal.Footer>
         <Button variant="primary" onClick={onSignUp}>
-          Sign In
+          Sign Up
         </Button>
         <Button variant="outlined-dark" onClick={onClose}>
           Close

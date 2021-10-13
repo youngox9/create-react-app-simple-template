@@ -34,7 +34,7 @@ function Files() {
     try {
       const { data, pageNo, pageSize, pageCounts, totalCounts, totalPages } =
         await axios({
-          url: `/fore/files`,
+          url: `/fore/metadata`,
           method: "GET",
           params: {
             ...p,
@@ -88,20 +88,9 @@ function Files() {
             columns={columns}
             rows={data}
             params={params}
-            onChange={(params) => {
-              setParams(params);
-              getList();
-            }}
+            onChange={(params) => setParams(params)}
           >
             <div className="spacer">
-              <Button
-                variant="primary"
-                size="sm"
-                onClick={() => setIsUploadOpen(true)}
-              >
-                <i class="fas fa-upload"></i>
-                Upload File
-              </Button>
               {selected.length > 0 && (
                 <Button variant="danger" size="sm">
                   <i class="fas fa-trash-alt"></i>

@@ -1,4 +1,4 @@
-const PROXY_DEV_URL = `http://10.2.0.19`;
+const PROXY_DEV_URL = `http://10.2.0.17`;
 const { createProxyMiddleware } = require("http-proxy-middleware");
 
 module.exports = function (app) {

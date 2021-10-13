@@ -1,18 +1,23 @@
 import { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import { Form, Button, Row, FloatingLabel } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { Form, Button, FloatingLabel } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import Cookies from "js-cookie";
 
 import Logo from "@/static/logo.png";
 import axios from "@/utils/axios";
 import SignupModal from "@/components/SignupModal";
+import ForgetModal from "@/components/ForgetModal";
+
 import useForm from "@/hooks/useForm";
+import { setAuth } from "@/reducers/global";
 
 function Login() {
-  let history = useHistory();
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   const [isSignupOpen, setIsSignupOpen] = useState(false);
+  const [isForgetModalOpen, setIsForgetModalOpen] = useState(false);
 
   const [remember, setRemember] = useState(Cookies.get("remember") || false);
 
@@ -40,7 +45,7 @@ function Login() {
 
     if (isValid) {
       try {
-        const res = await axios({
+        const { data } = await axios({
           url: "/auth/login",
           method: "POST",
           data: {
@@ -48,6 +53,7 @@ function Login() {
           },
           withToken: false,
         });
+        dispatch(setAuth(data));
         history.push("/");
       } catch (e) {
         console.log(e);
@@ -117,7 +123,12 @@ function Login() {
                     onChange={() => setRemember(!remember)}
                   />
                 </Form.Group>
-                <a className="text-right">Forget Password?</a>
+                <a
+                  className="text-right"
+                  onClick={() => setIsForgetModalOpen(true)}
+                >
+                  Forget Password?
+                </a>
               </div>
               <Button variant="primary" type="submit" onClick={login}>
                 Sign Up
@@ -131,15 +142,11 @@ function Login() {
             <div className="row">
               <div className="col">
                 <div className="spacer">
-                  <Button
-                    className="mg-2"
-                    variant="outline-dark"
-                    onClick={login}
-                  >
-                    Google
+                  <Button className="mg-2" variant="outline-dark">
+                    <i class="fab fa-google"></i> Google
                   </Button>
-                  <Button variant="outline-dark" onClick={login}>
-                    Facebook
+                  <Button variant="outline-dark">
+                    <i class="fab fa-facebook"></i> Facebook
                   </Button>
                 </div>
               </div>
@@ -157,8 +164,12 @@ function Login() {
         isOpen={isSignupOpen}
         onClose={() => setIsSignupOpen(false)}
       />
+      <ForgetModal
+        isOpen={isForgetModalOpen}
+        onClose={() => setIsForgetModalOpen(false)}
+      />
     </>
   );
 }
 
-export default connect()(Login);
+export default Login;

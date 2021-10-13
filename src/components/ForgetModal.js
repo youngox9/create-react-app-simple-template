@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import axios from "@/utils/axios";
 import useForm from "@/hooks/useForm";
 
-function ResendModal(props) {
+function SignupModal(props) {
   const [form, setForm] = useState({
     email: "",
   });
@@ -32,7 +32,7 @@ function ResendModal(props) {
           data: form,
           withToken: false,
         });
-        toast("已寄出驗證信件", {
+        toast("Please check your registered email inbox", {
           type: "success",
         });
         onClose();
@@ -48,13 +48,17 @@ function ResendModal(props) {
       onHide={onClose}
       scrollable={true}
       centered={true}
-      size="lg"
+      size="md"
     >
       <Modal.Header closeButton>
-        <Modal.Title>Resend Vertify Email</Modal.Title>
+        <Modal.Title>Forget Password?</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
+        <p>
+          Please enter your registered email address, and we'll send you a link
+          to reset your password.
+        </p>
         <Form className="form">
           <div className="row">
             <div class="col col-12">
@@ -76,7 +80,7 @@ function ResendModal(props) {
       </Modal.Body>
       <Modal.Footer>
         <Button variant="primary" onClick={onSubmit}>
-          Resend
+          Sign In
         </Button>
         <Button variant="outlined-dark" onClick={onClose}>
           Close
@@ -86,4 +90,4 @@ function ResendModal(props) {
   );
 }
 
-export default connect()(ResendModal);
+export default connect()(SignupModal);

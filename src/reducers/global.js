@@ -1,4 +1,8 @@
 const SET_LOADING = "SET_LOADING";
+const SET_AUTH = "SET_AUTH";
+const CLEAR_AUTH = "CLEAR_AUTH";
+const SET_SHARED_WORKSPACES = "SET_SHARED_WORKSPACES";
+const SET_OWNED_WORKSPACES = "SET_OWNED_WORKSPACES";
 
 const initialState = {
   isLoading: false,
@@ -6,6 +10,8 @@ const initialState = {
     uid: sessionStorage.getItem("uid"),
     token: sessionStorage.getItem("token"),
   },
+  sharedWorkspaces: [],
+  ownedWorkspaces: [],
 };
 
 const reducers = (state = initialState, action) => {
@@ -15,11 +21,19 @@ const reducers = (state = initialState, action) => {
         ...state,
         isLoading: action.isLoading,
       };
-    case "SET_AUTH":
+    case SET_AUTH:
       const { uid, token } = action.auth;
-      sessionStorage.getItem("uid");
-      sessionStorage.getItem("token");
-      return { ...state, auth: action.auth };
+      sessionStorage.setItem("uid", uid);
+      sessionStorage.setItem("token", token);
+      return { ...state, auth: { uid, token } };
+    case CLEAR_AUTH:
+      sessionStorage.setItem("uid", "");
+      sessionStorage.setItem("token", "");
+      return { ...state, auth: { uid: "", token: "" } };
+    case SET_SHARED_WORKSPACES:
+      return { ...state, sharedWorkspaces: action.data };
+    case SET_OWNED_WORKSPACES:
+      return { ...state, ownedWorkspaces: action.data };
     default:
       return state;
   }
@@ -33,11 +47,29 @@ export function setLoading(isLoading) {
 }
 
 export function setAuth(auth) {
-  console.log(">>>>>", "action");
   return {
-    type: "SET_LOADING",
+    type: SET_AUTH,
     auth,
   };
 }
 
+export function clearAuth() {
+  return {
+    type: CLEAR_AUTH,
+  };
+}
+
+export function setSharedWorkspaces(data) {
+  return {
+    type: SET_SHARED_WORKSPACES,
+    data,
+  };
+}
+
+export function setOwnedWorkspaces(data) {
+  return {
+    type: SET_OWNED_WORKSPACES,
+    data,
+  };
+}
 export default reducers;

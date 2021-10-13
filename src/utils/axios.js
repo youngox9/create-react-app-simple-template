@@ -21,6 +21,7 @@ instance.interceptors.request.use(
 
     if (withToken) {
       const token = sessionStorage.getItem("token");
+
       if (token) {
         config.headers.common["Authorization"] = `${token}`;
       }
@@ -41,7 +42,6 @@ instance.interceptors.response.use(
     return response?.data ? response.data : response;
   },
   function (e) {
-    console.log("error >>>>", e);
     const code = parseInt(e?.response?.status);
     const msg = e?.response?.data?.message || "Network Error";
     toast(msg, {
